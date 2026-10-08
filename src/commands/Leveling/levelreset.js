@@ -10,6 +10,7 @@ export default {
     .setDescription('Reset the server level leaderboard')
     .setDefaultMemberPermissions(PermissionFlagsBits.ManageGuild)
     .setDMPermission(false),
+  category: 'Leveling',
 
   async execute(interaction, config, client) {
     await InteractionHelper.safeDefer(interaction);
@@ -17,25 +18,14 @@ export default {
     const allowed = await checkUserPermissions(
       interaction,
       PermissionFlagsBits.ManageGuild,
-      'تحتاج صلاحية إدارة السيرفر لاستخدام هذا الأمر.'
+      'You need Manage Server permission to use this command.'
     );
     if (!allowed) return;
 
     const prefix = getUserLevelPrefix(interaction.guildId);
     const keys = await client.db.list(prefix);
     let deleted = 0;
+    let failed = 0;
 
     for (const key of Array.isArray(keys) ? keys : []) {
-      await client.db.delete(key);
-      deleted++;
-    }
-
-    logger.info(
-      `[ADMIN] ${interaction.user.tag} reset the level leaderboard in guild ${interaction.guildId}`
-    );
-
-    await InteractionHelper.safeEditReply(interaction, {
-      content: `تم تصفير ليدر بورد المستويات. حُذفت بيانات ${deleted} عضوًا.`
-    });
-  }
-};
+      const success = await client.db.delete(key);
