@@ -1,0 +1,17 @@
+{
+  "name": "community-ticket-application-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A standalone Discord bot with private support tickets and staff applications.",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": ">=20.10.0"
+  },
+  "dependencies": {
+    "discord.js": "14.26.4",
+    "dotenv": "^17.2.3"
+  }
+}
