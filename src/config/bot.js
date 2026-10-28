@@ -23,8 +23,8 @@ export const botConfig = {
     // 5 = Competing
     activities: [
       {
-        name: "AM launcher", // required by Discord API, not shown in the client
-        state: "minecraft",     // this is what people actually see
+        name: "vortex system", // required by Discord API, not shown in the client
+        state: "https://discord.gg/NwvAWV5ECD",     // this is what people actually see
         type: 0,               // Custom
       },
     ],
